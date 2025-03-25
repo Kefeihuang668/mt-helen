@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federation University Campus Guide</title>
+    <style>
+        :root {
+            /* Federation University brand colors */
+            --primary-color: #003087;  /* Federation Blue */
+            --secondary-color: #0047BB; /* Lighter blue for accents */
+            --background-color: #F5F7FA;
+            --card-background: #FFFFFF;
+            --text-primary: #1C1B1F;
+            --text-secondary: #4A5568;
+            --accent-color: #FFD700; /* Star color */
+            --light-blue: #E8EAF6; /* Light blue for input fields */
+            --spacing: 24px;
+            --border-radius: 12px;
+            --device-width: 1080px;
+            --device-height: 2340px;
+            --device-scale: 0.3;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: var(--spacing);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .device-container {
+            width: calc(var(--device-width) * var(--device-scale));
+            height: calc(var(--device-height) * var(--device-scale));
+            background: #000;
+            border-radius: 40px;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .device-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--background-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screen-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing) * 1.5);
+            margin-top: calc(var(--spacing) * 2);
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+            border: 1px solid rgba(0, 48, 135, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 48, 135, 0.2);
+        }
+
+        .card-content {
+            padding: var(--spacing);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 0 0 calc(var(--spacing) * 0.5) 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title::before {
+            content: "★";
+            color: var(--accent-color);
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Login screen specific styles */
+        .login-header-card {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 48, 135, 0.1);
+            width: 85%;
+            margin-top: 32px;
+            margin-bottom: 48px;
+            padding: 24px 12px;
+        }
+
+        .login-header-text {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 24px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .login-content-card {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 48, 135, 0.1);
+            width: 85%;
+            padding: 24px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-sizing: border-box;
+        }
+
+        .login-bottom-card {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 48, 135, 0.1);
+            width: 85%;
+            margin-top: 24px;
+            padding: 16px 12px;
+        }
+
+        .login-text-field {
+            background-color: var(--light-blue);
+            border-radius: 8px;
+            padding: 12px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+        }
+
+        .login-field-icon {
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .login-field-text {
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .login-field-trailing {
+            position: absolute;
+            right: 12px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .login-button {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            padding: 12px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            margin-top: 16px;
+            box-sizing: border-box;
+        }
+
+        /* Smart Navigation specific styles */
+        .smart-nav-topbar {
+            width: 100%;
+            height: 56px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+            border-radius: 0;
+        }
+
+        .smart-nav-topbar-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: calc(100% - 32px);
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .smart-nav-content {
+            height: calc(100% - 56px);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .dropdown-field {
+            background-color: var(--light-blue);
+            border-radius: 8px;
+            border: 1px solid #DDD;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-field-label {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .find-route-button {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .route-stats-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .route-stats-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 16px;
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .route-info-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .route-info-subtitle {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .map-preview {
+            flex: 1;
+            background-color: #e8eef7;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .route-options {
+            display: flex;
+            gap: 8px;
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+        }
+
+        .route-option {
+            flex: 1;
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 20px;
+            padding: 8px 12px;
+            font-size: 12px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .route-option.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .transport-modes {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .transport-mode {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .transport-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4px;
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .transport-icon.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .transport-label {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .transport-label.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --spacing: 16px;
+                --device-scale: 0.25;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Interactive Map styles */
+        .map-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e8eef7;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .map-building {
+            position: absolute;
+            background: #D1D5DB;
+            border-radius: 4px;
+        }
+
+        .map-road {
+            position: absolute;
+            background: white;
+        }
+
+        .map-marker {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid white;
+            transform: translate(-50%, -50%);
+        }
+
+        .location-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+        }
+
+        .location-dot-inner {
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .location-dot-pulse {
+            width: 24px;
+            height: 24px;
+            background: rgba(0, 71, 187, 0.2);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Interactive Map search bar styles */
+        .maps-search-container {
+            position: absolute;
+            top: 24px;
+            left: 12px;
+            right: 12px;
+            z-index: 10;
+        }
+
+        .maps-search-bar {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 6px rgba(0, 48, 135, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            gap: 12px;
+            border: 1px solid rgba(0, 48, 135, 0.1);
+        }
+
+        .maps-search-icon {
+            color: var(--primary-color);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .maps-search-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .maps-voice-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .maps-quick-filters {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            padding: 0 4px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .maps-filter-chip {
+            background: white;
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 1px 4px rgba(0, 48, 135, 0.1);
+            border: 1px solid rgba(0, 48, 135, 0.1);
+            white-space: nowrap;
+        }
+
+        .maps-filter-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gallery">
+            <!-- Login Screen Card -->
+            <div class="card">
+                <div class="device-container">
+                    <div class="device-screen">
+                        <div class="screen-content" style="background-color: var(--background-color); justify-content: flex-start;">
+                            <div class="login-header-card">
+                                <div class="login-header-text">Welcome to<br>Federation University</div>
+                            </div>
+                            
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; align-items: center;">
+                                <div class="login-content-card">
+                                    <!-- Email Field -->
+                                    <div class="login-text-field">
+                                        <div class="login-field-icon"></div>
+                                        <div class="login-field-text">University Email</div>
+                                    </div>
+                                    
+                                    <!-- Password Field -->
+                                    <div class="login-text-field">
+                                        <div class="login-field-icon"></div>
+                                        <div class="login-field-text">Password</div>
+                                        <div class="login-field-trailing"></div>
+                                    </div>
+                                    
+                                    <!-- Role Selection Button -->
+                                    <div class="login-text-field" style="border: 1px solid rgba(0, 48, 135, 0.5);">
+                                        <div class="login-field-icon"></div>
+                                        <div class="login-field-text">Student</div>
+                                    </div>
+                                    
+                                    <!-- Login Button -->
+                                    <div class="login-button">Sign In</div>
+                                </div>
+                                
+                                <div class="login-bottom-card">
+                                    <div style="color: gray; font-size: 12px; text-align: center;">Secure Federation University<br>authentication</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Login Screen</h2>
+                    <p class="card-description">
+                        Secure authentication interface with Federation University email login,
+                        password visibility toggle, and interactive role selection.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Map Card -->
+            <div class="card">
+                <div class="device-container">
+                    <div class="device-screen">
+                        <div class="screen-content" style="padding: 0; background-color: var(--background-color);">
+                            <!-- Map Container -->
+                            <div class="map-container">
+                                <!-- Search Bar -->
+                                <div class="maps-search-container">
+                                    <div class="maps-search-bar">
+                                        <div class="maps-search-icon">🔍</div>
+                                        <input type="text" class="maps-search-input" placeholder="Search locations">
+                                        <div class="maps-voice-icon">🎤</div>
+                                    </div>
+                                    <div class="maps-quick-filters">
+                                        <div class="maps-filter-chip">
+                                            <span class="maps-filter-icon">📚</span>
+                                            <span>Library</span>
+                                        </div>
+                                        <div class="maps-filter-chip">
+                                            <span class="maps-filter-icon">🍽️</span>
+                                            <span>Dining Hall</span>
+                                        </div>
+                                        <div class="maps-filter-chip">
+                                            <span class="maps-filter-icon">🏃</span>
+                                            <span>Sports Center</span>
+                                        </div>
+                                        <div class="maps-filter-chip">
+                                            <span class="maps-filter-icon">🎓</span>
+                                            <span>Lecture Halls</span>
+                                        </div>
+                                        <div class="maps-filter-chip">
+                                            <span class="maps-filter-icon">☕</span>
+                                            <span>Cafes</span>
+                                        </div>
+                                        <div class="maps-filter-chip">
+                                            <span class="maps-filter-icon">🏥</span>
+                                            <span>Health Center</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Buildings -->
+                                <div class="map-building" style="width: 50px; height: 40px; top: 25%; left: 25%;"></div>
+                                <div class="map-building" style="width: 60px; height: 45px; top: 35%; left: 45%;"></div>
+                                <div class="map-building" style="width: 45px; height: 55px; top: 55%; left: 35%;"></div>
+                                <div class="map-building" style="width: 55px; height: 40px; top: 65%; left: 55%;"></div>
+
+                                <!-- Roads -->
+                                <div class="map-road" style="width: 8px; height: 160px; top: 25%; left: 35%;"></div>
+                                <div class="map-road" style="width: 120px; height: 8px; top: 45%; left: 35%;"></div>
+                                <div class="map-road" style="width: 8px; height: 120px; top: 45%; left: 55%;"></div>
+                                <div class="map-road" style="width: 80px; height: 8px; top: 65%; left: 35%;"></div>
+
+                                <!-- Building Markers -->
+                                <div class="map-marker" style="top: 25%; left: 25%;"></div>
+                                <div class="map-marker" style="top: 35%; left: 45%;"></div>
+                                <div class="map-marker" style="top: 55%; left: 35%;"></div>
+                                <div class="map-marker" style="top: 65%; left: 55%;"></div>
+
+                                <!-- Current Location Dot -->
+                                <div class="location-dot" style="bottom: 25%; right: 25%;">
+                                    <div class="location-dot-inner"></div>
+                                    <div class="location-dot-pulse"></div>
+                                </div>
+
+                                <!-- Location Button -->
+                                <div style="position: absolute; bottom: 16px; right: 16px; width: 40px; height: 40px; background: white; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                                    <div style="color: var(--primary-color); font-size: 18px;">📍</div>
+                                </div>
+
+                                <!-- Layers Button -->
+                                <div style="position: absolute; bottom: 16px; right: 64px; width: 40px; height: 40px; background: white; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                                    <div style="color: #666; font-size: 18px;">⊟</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Interactive Map</h2>
+                    <p class="card-description">
+                        Detailed campus map with building markers and info windows, interactive search,
+                        and precise location tracking for easy navigation.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Smart Navigation Card -->
+            <div class="card">
+                <div class="device-container">
+                    <div class="device-screen">
+                        <div class="screen-content" style="padding: 0;">
+                            <!-- TopAppBar -->
+                            <div class="smart-nav-topbar">
+                                <div class="smart-nav-topbar-title">Smart Navigation</div>
+                            </div>
+                            
+                            <!-- Main Content -->
+                            <div class="smart-nav-content">
+                                <!-- Input Card -->
+                                <div style="background-color: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 16px;">
+                                    <!-- Start Location Field -->
+                                    <div style="margin-bottom: 16px;">
+                                        <div class="dropdown-field-label">Start Location</div>
+                                        <div class="dropdown-field">
+                                            <div class="dropdown-field-icon">📍</div>
+                                            <div style="flex-grow: 1;">P Building</div>
+                                            <div class="dropdown-arrow">▼</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Swap Button -->
+                                    <div class="swap-button">⇅</div>
+                                    
+                                    <!-- Destination Field -->
+                                    <div style="margin-bottom: 16px;">
+                                        <div class="dropdown-field-label">Destination</div>
+                                        <div class="dropdown-field">
+                                            <div class="dropdown-field-icon">🏁</div>
+                                            <div style="flex-grow: 1;">E Building</div>
+                                            <div class="dropdown-arrow">▼</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Find Route Button -->
+                                    <div class="find-route-button">
+                                        🚶 Find Route
+                                    </div>
+                                </div>
+                                
+                                <!-- Route Stats Card -->
+                                <div class="route-stats-card">
+                                    <div class="route-stats-icon">🚶</div>
+                                    <div>
+                                        <div class="route-info-title">5 min (400 m)</div>
+                                        <div class="route-info-subtitle">Via Beanland Mall</div>
+                                    </div>
+                                </div>
+
+                                <!-- Map Preview -->
+                                <div class="map-preview">
+                                    <!-- Roads -->
+                                    <div class="map-road" style="width: 200px; height: 14px; top: 100px; left: 50%; transform: translateX(-50%);"></div>
+                                    <div class="map-road" style="width: 240px; height: 14px; bottom: 80px; left: 50%; transform: translateX(-50%);"></div>
+                                    <div class="map-road" style="width: 14px; height: 160px; top: 50%; left: 60px; transform: translateY(-50%);"></div>
+                                    <div class="map-road" style="width: 14px; height: 200px; top: 50%; right: 60px; transform: translateY(-50%);"></div>
+                                    
+                                    <!-- Buildings -->
+                                    <div class="map-building" style="width: 50px; height: 40px; top: 80px; left: 80px;"></div>
+                                    <div class="map-building" style="width: 50px; height: 40px; bottom: 80px; right: 80px;"></div>
+                                    
+                                    <!-- Blue line route path -->
+                                    <div style="position: absolute; top: 100px; left: 105px; width: 160px; height: 160px; transform: rotate(45deg); overflow: hidden;">
+                                        <div style="width: 100%; height: 8px; background-color: var(--secondary-color); position: absolute; top: 0;"></div>
+                                    </div>
+                                    
+                                    <!-- Start and End Markers -->
+                                    <div class="map-marker" style="top: 100px; left: 105px;"></div>
+                                    <div class="map-marker" style="bottom: 100px; right: 105px;"></div>
+                                    
+                                    <!-- Route Options -->
+                                    <div class="route-options">
+                                        <div class="route-option active">Fastest</div>
+                                        <div class="route-option">Accessible</div>
+                                        <div class="route-option">Indoor</div>
+                                    </div>
+                                </div>
+
+                                <!-- Transport Modes -->
+                                <div class="transport-modes">
+                                    <div class="transport-mode">
+                                        <div class="transport-icon active">🚶</div>
+                                        <div class="transport-label active">Walking</div>
+                                    </div>
+                                    <div class="transport-mode">
+                                        <div class="transport-icon">🚲</div>
+                                        <div class="transport-label">Cycling</div>
+                                    </div>
+                                    <div class="transport-mode">
+                                        <div class="transport-icon">🚌</div>
+                                        <div class="transport-label">Shuttle</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Navigation</h2>
+                    <p class="card-description">
+                        Point-to-point navigation with building selection, multiple route options,
+                        and transport mode choices for campus journeys.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Favorites Card -->
+            <div class="card">
+                <div class="device-container">
+                    <div class="device-screen">
+                        <div class="screen-content" style="padding: 0;">
+                            <!-- TopAppBar -->
+                            <div class="smart-nav-topbar">
+                                <div class="smart-nav-topbar-title">My Favorites</div>
+                            </div>
+                            
+                            <!-- Favorites List -->
+                            <div class="favorites-content">
+                                <!-- Favorite Item -->
+                                <div class="favorite-item">
+                                    <div class="favorite-icon">P</div>
+                                    <div class="favorite-details">
+                                        <div class="favorite-name">P Building</div>
+                                        <div class="favorite-description">Student Service Office</div>
+                                        <div class="favorite-tag">⭐ Frequent</div>
+                                    </div>
+                                    <div class="favorite-actions">
+                                        <button class="favorite-navigate-btn">
+                                            <span style="margin-right: 4px;">📍</span>
+                                            Navigate
+                                        </button>
+                                        <button class="favorite-remove-btn">×</button>
+                                    </div>
+                                </div>
+
+                                <div class="favorite-item">
+                                    <div class="favorite-icon">E</div>
+                                    <div class="favorite-details">
+                                        <div class="favorite-name">E Building</div>
+                                        <div class="favorite-description">E.J. Barker Library</div>
+                                        <div class="favorite-tag">📚 Study</div>
+                                    </div>
+                                    <div class="favorite-actions">
+                                        <button class="favorite-navigate-btn">
+                                            <span style="margin-right: 4px;">📍</span>
+                                            Navigate
+                                        </button>
+                                        <button class="favorite-remove-btn">×</button>
+                                    </div>
+                                </div>
+
+                                <div class="favorite-item">
+                                    <div class="favorite-icon">U</div>
+                                    <div class="favorite-details">
+                                        <div class="favorite-name">U Building</div>
+                                        <div class="favorite-description">Albert Coates Complex</div>
+                                        <div class="favorite-tag">🎓 Classes</div>
+                                    </div>
+                                    <div class="favorite-actions">
+                                        <button class="favorite-navigate-btn">
+                                            <span style="margin-right: 4px;">📍</span>
+                                            Navigate
+                                        </button>
+                                        <button class="favorite-remove-btn">×</button>
+                                    </div>
+                                </div>
+
+                                <div class="favorite-item">
+                                    <div class="favorite-icon">C</div>
+                                    <div class="favorite-details">
+                                        <div class="favorite-name">C Building</div>
+                                        <div class="favorite-description">Geoffrey Blainey Auditorium</div>
+                                        <div class="favorite-tag">🎬 Events</div>
+                                    </div>
+                                    <div class="favorite-actions">
+                                        <button class="favorite-navigate-btn">
+                                            <span style="margin-right: 4px;">📍</span>
+                                            Navigate
+                                        </button>
+                                        <button class="favorite-remove-btn">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FloatingActionButton -->
+                            <div class="map-fab" style="background-color: var(--primary-color);">
+                                <div class="map-fab-icon" style="color: white;">+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Favorite Places</h2>
+                    <p class="card-description">
+                        Save and organize your frequently visited Federation University locations
+                        with custom labels for quick and easy access.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
