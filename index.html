@@ -119,16 +119,39 @@
 
     <script>
         var customMarkers = [
-            { title: "P Building", description: "Student Service Office", coordinates: [143.891156, -37.625626] },
-            { title: "A Building", description: "Campus Library - quiet study zone", coordinates: [143.890670, -37.627455] },
-            { title: "Y Building", description: "Coffee and snacks", coordinates: [143.891407, -37.627993] }
+            //{ title: "P Building", description: "Student Service Office", coordinates: [143.891156, -37.625626] },
+            //{ title: "A Building", description: "Campus Library - quiet study zone", coordinates: [143.890670, -37.627455] },
+            //{ title: "Y Building", description: "Coffee and snacks", coordinates: [143.891407, -37.627993] }
+				{ title: "Q1 Building", description: "Sport and Recreation Centre", coordinates: [143.88964,-37.62451] },
+				{ title: "Q2 Building", description: "Multi–Purpose Building", coordinates: [143.88948,-37.6249] },
+				{ title: "M Building", description: "Founders Theatre", coordinates: [143.89045,-37.62668] },
+				{ title: "A Building", description: "Admissions, Retention and Success", coordinates: [143.89072,-37.62714] },
+				{ title: "Y Building", description: "Y", coordinates: [143.89113,-37.6278] },
+				{ title: "P Building", description: "Health Sports and Aquatic Centre", coordinates: [143.89106,-37.62553] },
+				{ title: "C Building", description: "C", coordinates: [143.89123,-37.62617] },
+				{ title: "B Building", description: "B", coordinates: [143.89166,-37.62611] },
+				{ title: "D Building", description: "Disability and Learning Access Unit", coordinates: [143.89155,-37.2625] },
+				{ title: "T Building", description: "Chief Operating Officer", coordinates: [143.89197,-37.62683] },
+				{ title: "L Building", description: "Information Technology Services (ITS) Services", coordinates: [143.89219,-37.6261] },
+				{ title: "U Building", description: "International Student Support", coordinates: [143.89302,-37.62589] },
+				{ title: "S Building", description: "Student Commons Gnarrwirring Karung", coordinates: [143.89291,-37.62646] },
+				{ title: "H Building", description: "H", coordinates: [143.89291,-37.62678] },
+				{ title: "E Building", description: "E", coordinates: [143.8938,-37.62606] },
+				{ title: "F Building", description: "Research and Innovation", coordinates: [143.89397,-37.6267] },
+				{ title: "G Building", description: "Muslim Prayer Room", coordinates: [143.89377,-37.62716] },
+				{ title: "K Building", description: "Fed Children’s Centre", coordinates: [143.89362,-37.6256] },
+				{ title: "FL Building", description: "Fedliving", coordinates: [143.89382,-37.62392] },
+				{ title: "V Building", description: "Property and Infrastructure Depot", coordinates: [143.89536,-37.62781] },
+				{ title: "N1 Building", description: "N1", coordinates: [143.89311,-37.6272] },
+				{ title: "N2 Building", description: "N2", coordinates: [143.89278,-37.62716] },
+
         ];
         var map, datasource, popup;
 
         function getMap() {
             map = new atlas.Map('myMap', {
                 center: [143.892524, -37.626562],
-                zoom: 17.5,
+                zoom: 18,
                 style: 'road',
                 view: 'Auto',
                 renderWorldCopies: true,
