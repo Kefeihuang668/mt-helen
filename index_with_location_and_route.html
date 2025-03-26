@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Campus Full Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" rel="stylesheet" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
+    <script src="https://atlas.microsoft.com/sdk/javascript/service/2/atlas-service.min.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: segoeui, sans-serif;
+            overflow: hidden;
+        }
+
+        #myMap {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+        }
+
+        #search {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            z-index: 10;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-input-box {
+            padding: 10px;
+        }
+
+        .search-input-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+
+        .search-icon {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            background-size: 20px 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M10.5 0a5.5 5.5 0 013.9 9.4l4 4a1 1 0 01-1.4 1.4l-4-4a5.5 5.5 0 11-2.5-10.8zm0 2a3.5 3.5 0 100 7 3.5 3.5 0 000-7z'/%3E%3C/svg%3E");
+        }
+
+        .search-input-group input {
+            flex-grow: 1;
+            border: none;
+            padding: 8px 10px;
+            font-size: 16px;
+            outline: none;
+            background: transparent;
+        }
+
+        #results-panel {
+            max-height: 50vh;
+            overflow-y: auto;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-top: 1px solid #ccc;
+        }
+
+        #results-panel > li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        #results-panel > li:hover {
+            background-color: #f5f5f5;
+        }
+
+        #results-panel .title {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        #results-panel .info {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body onload="getMap()">
+    <div id="myMap"></div>
+    <div id="search">
+        <div class="search-input-box">
+            <div class="search-input-group">
+                <div class="search-icon"></div>
+                <input id="search-input" type="text" placeholder="Search" />
+            </div>
+        </div>
+        <ul id="results-panel"></ul>
+    </div>
+
+    <script>
+        var customMarkers = [
+            //{ title: "P Building", description: "Student Service Office", coordinates: [143.891156, -37.625626] },
+            //{ title: "A Building", description: "Campus Library - quiet study zone", coordinates: [143.890670, -37.627455] },
+            //{ title: "Y Building", description: "Coffee and snacks", coordinates: [143.891407, -37.627993] }
+				{ title: "Q1 Building", description: "Sport and Recreation Centre", coordinates: [143.88964,-37.62451] },
+				{ title: "Q2 Building", description: "Multi–Purpose Building", coordinates: [143.88948,-37.6249] },
+				{ title: "M Building", description: "Founders Theatre", coordinates: [143.89045,-37.62668] },
+				{ title: "A Building", description: "Admissions, Retention and Success", coordinates: [143.89072,-37.62714] },
+				{ title: "Y Building", description: "Y", coordinates: [143.89113,-37.6278] },
+				{ title: "P Building", description: "Health Sports and Aquatic Centre", coordinates: [143.89106,-37.62553] },
+				{ title: "C Building", description: "C", coordinates: [143.89123,-37.62617] },
+				{ title: "B Building", description: "B", coordinates: [143.89166,-37.62611] },
+				{ title: "D Building", description: "Disability and Learning Access Unit", coordinates: [143.89155,-37.62625] },
+				{ title: "T Building", description: "Chief Operating Officer", coordinates: [143.89197,-37.62683] },
+				{ title: "L Building", description: "Information Technology Services (ITS) Services", coordinates: [143.89219,-37.6261] },
+				{ title: "U Building", description: "International Student Support", coordinates: [143.89302,-37.62589] },
+				{ title: "S Building", description: "Student Commons Gnarrwirring Karung", coordinates: [143.89291,-37.62646] },
+				{ title: "H Building", description: "H", coordinates: [143.89291,-37.62678] },
+				{ title: "E Building", description: "E", coordinates: [143.8938,-37.62606] },
+				{ title: "F Building", description: "Research and Innovation", coordinates: [143.89397,-37.6267] },
+				{ title: "G Building", description: "Muslim Prayer Room", coordinates: [143.89377,-37.62716] },
+				{ title: "K Building", description: "Fed Children’s Centre", coordinates: [143.89362,-37.6256] },
+				{ title: "FL Building", description: "Fedliving", coordinates: [143.89382,-37.62392] },
+				{ title: "V Building", description: "Property and Infrastructure Depot", coordinates: [143.89536,-37.62781] },
+				{ title: "N1 Building", description: "N1", coordinates: [143.89311,-37.6272] },
+				{ title: "N2 Building", description: "N2", coordinates: [143.89278,-37.62716] },
+
+        ];
+        var map, datasource, popup;
+
+        function getMap() {
+            map = new atlas.Map('myMap', {
+                center: [143.892524, -37.626562],
+                zoom: 18,
+                style: 'road',
+                view: 'Auto',
+                renderWorldCopies: true,
+                authOptions: {
+                    authType: 'subscriptionKey',
+                    subscriptionKey: 'EbYAOGRfvuWaO1fqwHvIYUXRfGnwL64gidYY33HLaHQv1nn8a2B2JQQJ99BCACYeBjFCySreAAAgAZMP2CxT'
+                }
+            });
+
+            map.events.add('ready', function () {
+                datasource = new atlas.source.DataSource();
+                map.sources.add(datasource);
+
+                var layer = new atlas.layer.SymbolLayer(datasource, null, {
+                    iconOptions: { image: 'pin-round-darkblue', anchor: 'center', allowOverlap: true }
+                });
+                map.layers.add(layer);
+
+                map.events.add("click", layer, function (e) {
+                    if (e.shapes && e.shapes.length > 0) showPopup(e.shapes[0]);
+                });
+
+                popup = new atlas.Popup();
+                loadMarkers();
+
+                setTimeout(() => {
+                    const shapes = datasource.getShapes();
+                    if (shapes.length > 0) {
+                        showPopup(shapes[0]);
+                    }
+                }, 1000);
+            });
+
+            document.getElementById("search-input").addEventListener("keyup", search);
+        }
+
+        function loadMarkers() {
+            var features = customMarkers.map(marker =>
+                new atlas.data.Feature(new atlas.data.Point(marker.coordinates), {
+                    title: marker.title, description: marker.description
+                })
+            );
+            datasource.add(features);
+        }
+
+        function search() {
+            var query = document.getElementById("search-input").value.trim().toLowerCase();
+            var resultsPanel = document.getElementById("results-panel");
+            datasource.clear();
+            popup.close();
+            resultsPanel.innerHTML = '';
+
+            var results = customMarkers.filter(m =>
+                m.title.toLowerCase().includes(query) || m.description.toLowerCase().includes(query)
+            );
+
+            if (results.length === 0) {
+                resultsPanel.innerHTML = '<li>No matching results found.</li>';
+                return;
+            }
+
+            var features = results.map((m, i) =>
+                new atlas.data.Feature(new atlas.data.Point(m.coordinates), {
+                    id: 'marker-' + i, title: m.title, description: m.description
+                })
+            );
+
+            datasource.add(features);
+            map.setCamera({ bounds: atlas.data.BoundingBox.fromData(features), padding: 50 });
+
+            resultsPanel.innerHTML = features.map(f =>
+                `<li onclick="map.setCamera({center:[${f.geometry.coordinates}], zoom:18})">
+                    <div class='title'>${f.properties.title}</div>
+                    <div class='info'>${f.properties.description}</div>
+                 </li>`
+            ).join('');
+        }
+
+        function showPopup(shape) {
+            var p = shape.getProperties();
+            var html = `<div class='poi-box'><div class='poi-title-box'><b>${p.title}</b></div>
+                        <div class='poi-content-box'><div class='info location'>${p.description}</div></div></div>`;
+            popup.setOptions({ position: shape.getCoordinates(), content: html });
+            popup.open(map);
+        }
+    </script>
+
+<script>
+function drawRoute(startCoord, endCoord) {
+    if (map.sources.getById('routeSource')) {
+        map.sources.remove('routeSource');
+        map.layers.remove('routeLayer');
+    }
+
+    fetch(`https://atlas.microsoft.com/route/directions/json?api-version=1.0&query=${startCoord[1]},${startCoord[0]}:${endCoord[1]},${endCoord[0]}&subscription-key=EbYAOGRfvuWaO1fqwHvIYUXRfGnwL64gidYY33HLaHQv1nn8a2B2JQQJ99BCACYeBjFCySreAAAgAZMP2CxT`)
+        .then(res => res.json())
+        .then(data => {
+            const routeCoords = data.routes[0].legs[0].points.map(p => [p.longitude, p.latitude]);
+            const routeSource = new atlas.source.DataSource('routeSource');
+            map.sources.add(routeSource);
+
+            routeSource.add(new atlas.data.Feature(new atlas.data.LineString(routeCoords)));
+
+            const routeLayer = new atlas.layer.LineLayer(routeSource, 'routeLayer', {
+                strokeColor: 'blue',
+                strokeWidth: 4
+            });
+            map.layers.add(routeLayer);
+        })
+        .catch(err => console.error("Route Error:", err));
+}
+
+navigator.geolocation.getCurrentPosition(function (position) {
+    const userPosition = [position.coords.longitude, position.coords.latitude];
+    const userDataSource = new atlas.source.DataSource();
+    map.sources.add(userDataSource);
+
+    userDataSource.add(new atlas.data.Feature(new atlas.data.Point(userPosition), {
+        title: "You are here"
+    }));
+
+    const userSymbolLayer = new atlas.layer.SymbolLayer(userDataSource, null, {
+        iconOptions: {
+            image: 'pin-round-red',
+            anchor: 'center'
+        }
+    });
+    map.layers.add(userSymbolLayer);
+
+    const resultsPanel = document.getElementById("results-panel");
+    resultsPanel.addEventListener("click", function (e) {
+        const li = e.target.closest("li");
+        if (!li) return;
+
+        const title = li.querySelector(".title").textContent;
+        const match = customMarkers.find(m => m.title === title);
+        if (match) {
+            drawRoute(userPosition, match.coordinates);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
