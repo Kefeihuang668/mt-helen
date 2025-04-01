@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.fedunimap.wayfinding.app-mergeDebugResources-66:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Stephanie Z\\.gradle\\caches\\8.11.1\\transforms\\1f5fdb9ee2e12c663e663518610e4d81\\transformed\\appcompat-1.6.1\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

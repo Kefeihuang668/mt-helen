@@ -1,0 +1,34 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable input_background
+id buttonLogin
+id buttonRegister
+id buttonToLogin
+id buttonToRegister
+id editTextEmail
+id editTextPassword
+id main
+layout activity_login
+layout activity_manual_navigation
+layout activity_register
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+string gcm_defaultSenderId
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
+string project_id
+style Theme.Wayfinding
+xml backup_rules
+xml data_extraction_rules

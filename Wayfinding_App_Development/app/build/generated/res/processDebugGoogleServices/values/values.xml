@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">1061804852524</string>
+    <string name="google_api_key" translatable="false">AIzaSyDPuJ_vgePNA3PvTC49Q4iyJGh-4hxPY-c</string>
+    <string name="google_app_id" translatable="false">1:1061804852524:android:6907b970b65a23ea9a5889</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDPuJ_vgePNA3PvTC49Q4iyJGh-4hxPY-c</string>
+    <string name="google_storage_bucket" translatable="false">wayfinding-app-d2404.firebasestorage.app</string>
+    <string name="project_id" translatable="false">wayfinding-app-d2404</string>
+</resources>
