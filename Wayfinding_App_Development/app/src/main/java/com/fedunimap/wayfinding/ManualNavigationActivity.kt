@@ -1,23 +1,60 @@
 package com.fedunimap.wayfinding
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class ManualNavigationActivity : ComponentActivity() {
+    private lateinit var mapView: MapView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 创建 MapView 实例
+        mapView = MapView(this)
+        mapView.onCreate(savedInstanceState)
+
         setContent {
-            // 这里可以根据需要添加点对点导航界面的UI
-            Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-                Text("Enter Start and End Locations", style = MaterialTheme.typography.headlineSmall)
-                Spacer(modifier = Modifier.height(16.dp))
-                // 添加起点、终点输入框，导航按钮等
+            Column(modifier = Modifier.fillMaxSize()) {
+                AndroidView(factory = {
+                    mapView.getMapAsync { googleMap ->
+                        Log.d("MAP_DEBUG", "Google Map is ready ✅")
+
+                        val fedUni = LatLng(-37.631, 143.426)
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fedUni, 17f))
+                        googleMap.addMarker(MarkerOptions().position(fedUni).title("FedUni Mount Helen"))
+                    }
+                    mapView
+                }, modifier = Modifier.fillMaxSize())
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        mapView.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        mapView.onDestroy()
+        super.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
     }
 }

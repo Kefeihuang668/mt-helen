@@ -1,16 +1,9 @@
 -- Merging decision tree log ---
-meta-data#com.google.android.geo.API_KEY
-INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:32:9-34:47
-	android:value
-		INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:34:13-44
-	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:33:13-58
 manifest
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-42:12
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:1-51:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\6b1b450318c58104da2a088f8f880401\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\e53675c948fc471eb9dd4f184c00b3f6\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\3356672c4b797fb35952750953461d8e\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
@@ -109,7 +102,7 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\Stephan
 	xmlns:android
 		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:4:5-67
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:5:5-67
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\4845d9a9255a8e98a2150ccca775f3f8\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\4845d9a9255a8e98a2150ccca775f3f8\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
 MERGED from [com.google.firebase:firebase-auth:22.3.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\93f3004d529b1ccf14a867a3822e06a2\transformed\jetified-firebase-auth-22.3.0\AndroidManifest.xml:25:5-67
@@ -117,28 +110,28 @@ MERGED from [com.google.firebase:firebase-auth:22.3.0] C:\Users\Stephanie Z\.gra
 MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\26e2148602ae5de209c8bf0e4b75a47d\transformed\jetified-recaptcha-18.1.2\AndroidManifest.xml:7:5-67
 MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\26e2148602ae5de209c8bf0e4b75a47d\transformed\jetified-recaptcha-18.1.2\AndroidManifest.xml:7:5-67
 	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:4:22-64
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:5:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:5:5-79
-MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\4845d9a9255a8e98a2150ccca775f3f8\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\4845d9a9255a8e98a2150ccca775f3f8\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
-MERGED from [com.google.firebase:firebase-auth:22.3.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\93f3004d529b1ccf14a867a3822e06a2\transformed\jetified-firebase-auth-22.3.0\AndroidManifest.xml:26:5-79
-MERGED from [com.google.firebase:firebase-auth:22.3.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\93f3004d529b1ccf14a867a3822e06a2\transformed\jetified-firebase-auth-22.3.0\AndroidManifest.xml:26:5-79
-MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\26e2148602ae5de209c8bf0e4b75a47d\transformed\jetified-recaptcha-18.1.2\AndroidManifest.xml:8:5-79
-MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\26e2148602ae5de209c8bf0e4b75a47d\transformed\jetified-recaptcha-18.1.2\AndroidManifest.xml:8:5-79
-	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:5:22-76
-uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:6:5-79
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\4845d9a9255a8e98a2150ccca775f3f8\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\4845d9a9255a8e98a2150ccca775f3f8\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-auth:22.3.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\93f3004d529b1ccf14a867a3822e06a2\transformed\jetified-firebase-auth-22.3.0\AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-auth:22.3.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\93f3004d529b1ccf14a867a3822e06a2\transformed\jetified-firebase-auth-22.3.0\AndroidManifest.xml:26:5-79
+MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\26e2148602ae5de209c8bf0e4b75a47d\transformed\jetified-recaptcha-18.1.2\AndroidManifest.xml:8:5-79
+MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\26e2148602ae5de209c8bf0e4b75a47d\transformed\jetified-recaptcha-18.1.2\AndroidManifest.xml:8:5-79
 	android:name
 		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:6:22-76
-uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:7:5-81
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:7:5-79
 	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:7:22-78
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:7:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:8:22-78
 application
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:9:5-40:19
-INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:9:5-40:19
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:10:5-49:19
+INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:10:5-49:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\6b1b450318c58104da2a088f8f880401\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\6b1b450318c58104da2a088f8f880401\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\e53675c948fc471eb9dd4f184c00b3f6\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -186,51 +179,57 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\St
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.15.0] C:\Users\Stephanie Z\.gradle\caches\8.11.1\transforms\5f5a3076205661a2e500f60748de1f5d\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:15:9-35
 	android:label
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:13:9-41
 	android:roundIcon
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:13:9-54
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:14:9-54
 	android:icon
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:15:9-59
-activity#com.fedunimap.wayfinding.ManualNavigationActivity
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:16:9-18:40
-	android:exported
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:18:13-37
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:16:9-59
+meta-data#com.google.android.geo.API_KEY
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:19:9-21:71
+	android:value
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:21:13-68
 	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:17:13-53
-activity#com.fedunimap.wayfinding.RegisterActivity
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:19:9-21:40
-	android:exported
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:21:13-37
-	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:20:13-45
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:20:13-58
 activity#com.fedunimap.wayfinding.LoginActivity
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:22:9-30:20
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:24:9-31:20
 	android:exported
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:24:13-36
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:26:13-36
 	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:23:13-42
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:25:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:25:13-29:29
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:27:13-30:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:26:17-69
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:28:17-69
 	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:26:25-66
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:28:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:28:17-77
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:28:27-74
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:29:27-74
 activity#com.fedunimap.wayfinding.MainActivity
-ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:36:9-39:20
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:34:9-36:39
 	android:exported
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:38:13-36
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:36:13-36
 	android:name
-		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:37:13-41
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:35:13-41
+activity#com.fedunimap.wayfinding.ManualNavigationActivity
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:39:9-41:39
+	android:exported
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:41:13-36
+	android:name
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:40:13-53
+activity#com.fedunimap.wayfinding.RegisterActivity
+ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:44:9-46:40
+	android:exported
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:46:13-37
+	android:name
+		ADDED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml:45:13-45
 uses-sdk
 INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Stephanie Z\mt-helen\Wayfinding_App_Development\app\src\main\AndroidManifest.xml

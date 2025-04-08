@@ -8,6 +8,7 @@
         android:minSdkVersion="24"
         android:targetSdkVersion="35" />
 
+    <!-- 权限配置 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -40,12 +41,13 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
-        <activity
-            android:name="com.fedunimap.wayfinding.ManualNavigationActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.fedunimap.wayfinding.RegisterActivity"
-            android:exported="false" />
+
+        <!-- 地图 API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAOL0Pg5LQEOZUalLGuWgIOzt8kE8TWLfc" />
+
+        <!-- 登录页为 App 启动入口 -->
         <activity
             android:name="com.fedunimap.wayfinding.LoginActivity"
             android:exported="true" >
@@ -56,14 +58,20 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBjQ1F05fNHsMtJu6am7IReTaO2aGkJyKk" />
-
+        <!-- 主界面页 -->
         <activity
             android:name="com.fedunimap.wayfinding.MainActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
+
+        <!-- 手动导航页（要运行的页面） -->
+        <activity
+            android:name="com.fedunimap.wayfinding.ManualNavigationActivity"
+            android:exported="true" />
+
+        <!-- 注册页 -->
+        <activity
+            android:name="com.fedunimap.wayfinding.RegisterActivity"
+            android:exported="false" />
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"
             android:exported="true" />

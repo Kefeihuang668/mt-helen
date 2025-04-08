@@ -1,50 +1,95 @@
 package com.fedunimap.wayfinding
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
-
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MainActivity : ComponentActivity() {
+    private lateinit var mapView: MapView
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MainUIScreen()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1001
+            )
         }
+
+        mapView = MapView(this)
+        mapView.onCreate(savedInstanceState)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        setContent {
+            MainUIScreen(mapView, fusedLocationClient)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
     }
 }
 
 @Composable
-fun MainUIScreen() {
+fun MainUIScreen(mapView: MapView, fusedLocationClient: FusedLocationProviderClient) {
+    val context = LocalContext.current
+
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFF1F4FB) // 浅蓝背景（和 login 页面一致）
+        color = Color(0xFFF1F4FB)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+            modifier = Modifier.fillMaxSize().padding(16.dp)
         ) {
-            // 标题部分
             Text(
                 text = "Smart Navigation",
                 style = MaterialTheme.typography.headlineSmall,
-                color = Color(0xFF002B5B) // 深蓝色标题
+                color = Color(0xFF002B5B)
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            // 搜索栏
             TextField(
                 value = "",
                 onValueChange = {},
@@ -60,64 +105,81 @@ fun MainUIScreen() {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            // 地图占位符
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.White),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Map will be shown here",
-                    color = Color.Gray
-                )
-            }
+            AndroidView(
+                factory = {
+                    mapView.getMapAsync { googleMap ->
+                        val fedUni = LatLng(-37.62623191992383, 143.8917856963707)
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fedUni, 15f))
+                        googleMap.addMarker(
+                            MarkerOptions().position(fedUni).title("Federation University")
+                        )
+
+                        if (ContextCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                            ) == PackageManager.PERMISSION_GRANTED
+                        ) {
+                            googleMap.isMyLocationEnabled = true
+                        }
+
+                        googleMap.uiSettings.isZoomGesturesEnabled = true
+                    }
+                    mapView
+                },
+                modifier = Modifier.weight(1f).fillMaxWidth()
+            )
         }
 
-        // 右下角的浮动按钮
-        FloatingButtons()
+        FloatingButtons(mapView, fusedLocationClient)
     }
 }
 
+@SuppressLint("MissingPermission")
 @Composable
-fun FloatingButtons() {
+fun FloatingButtons(mapView: MapView, fusedLocationClient: FusedLocationProviderClient) {
     val context = LocalContext.current
+    val fedUniLatLng = LatLng(-37.62623191992383, 143.8917856963707)
 
-    // 这里的箭头按钮跳转到 ManualNavigationActivity 页面
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.End
     ) {
-        // 当前位置按钮
         FloatingActionButton(
             onClick = {
-                // 实现显示当前位置的逻辑
+                fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                    if (location != null) {
+                        val currentLatLng = LatLng(location.latitude, location.longitude)
+                        mapView.getMapAsync { googleMap ->
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17f))
+                        }
+                    }
+                }
             },
             containerColor = Color(0xFF002B5B),
             contentColor = Color.White
         ) {
-            // 当前无图标，保留按钮样式
+            Text("📍")
         }
+
         Spacer(modifier = Modifier.height(12.dp))
 
-        // 标记位置按钮
         FloatingActionButton(
             onClick = {
-                // 实现标记位置的逻辑
+                mapView.getMapAsync { googleMap ->
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(fedUniLatLng, 15f))
+                }
             },
             containerColor = Color(0xFF002B5B),
             contentColor = Color.White
         ) {
-            // 当前无图标，保留按钮样式
+            Text("🎓")
         }
+
         Spacer(modifier = Modifier.height(12.dp))
 
-        // 跳转到点对点导航的页面
         FloatingActionButton(
             onClick = {
                 val intent = Intent(context, ManualNavigationActivity::class.java)
@@ -126,7 +188,7 @@ fun FloatingButtons() {
             containerColor = Color(0xFF002B5B),
             contentColor = Color.White
         ) {
-            // 当前无图标，保留按钮样式
+            Text("➡")
         }
     }
 }
